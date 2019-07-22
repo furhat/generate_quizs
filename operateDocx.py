@@ -8,10 +8,11 @@ dependent: py-docx
 from docx import Document
 from docx.shared import Inches
 
-
 '''
 reference method, not in use.
 '''
+
+
 def operDocx():
     document = Document()
 
@@ -32,7 +33,7 @@ def operDocx():
         'first item in ordered list', style='ListNumber'
     )
 
-#    document.add_picture('monty-truth.png', width=Inches(1.25))
+    #    document.add_picture('monty-truth.png', width=Inches(1.25))
 
     table = document.add_table(rows=1, cols=3)
     hdr_cells = table.rows[0].cells
@@ -49,81 +50,68 @@ def operDocx():
 
     document.save('demo.docx')
 
-def writeDocx(contentList,docxName):
+
+def writeDocx(contentList, docxName):
     document = Document()
     # p = document.add_paragraph(content)
     # document.add_page_break()
-    total = contentList[0].__len__()
-    print 'amount of content: '+ str(total)
+    total = len(contentList)
+    print('amount of content: ' + str(total))
     p = 0
     q = 0
     hasContent = True
     # row = 20
     # col = 3
     t = 1
-    while(hasContent):
+    while (hasContent):
         if p >= total:
             hasContent = False
             break
         # if total - p > 60:
 
-        table = document.add_table(rows=20, cols=3)
+        table = document.add_table(rows=20, cols=2)
         # else:
         #     row = (total -p)//3 + 1
         #     table = document.add_table(rows=20, cols=3)
-        print 'table added  ' + str(t)
+        print('table added  ' + str(t))
         num = 1
         for i in range(20):
             # print 'insert row data'
-            for j in range(3):
+            for j in range(2):
                 if p >= total:
                     hasContent = False
                     break
-                table.rows[i].cells[j].text = str(num) + ')\t' + contentList[0][p]
-                num = num +1
+                table.rows[i].cells[j].text = str(num) + ')\t' + contentList[p]
+                num = num + 1
                 p = p + 1
-        # document.add_paragraph('----------------------------------------------------------------------------------------------------------------------')
-        # document.add_paragraph('----------------------------------------------------------------------------------------------------------------------')
-        # table = document.add_table(rows=3, cols=20)
-        # for m in range(3):
-        #     for n in range(20):
-        #         table.rows[m].cells[n].text = str(q + 1) +')'+ str(contentList[1][q])
-        #         q = q + 1
-
-#        results = ''
-#        num = 1
-#        for m in range(60):
-#            results = results +'^'+ str(num)+'>'+str(contentList[1][q])+'$'
-#            q = q + 1
-#            num +=1
-#        par = document.add_paragraph(u'本页答案： ')
-#        par.add_run(results).italic = True
-        print 'now in the '+ str(p) + 'step'
-        t = t +1
-        # document.add_paragraph('----------------------------------------------------------------------------------------------------------------------')
+        print('now in the ' + str(p) + 'step')
+        t = t + 1
+        document.add_paragraph('\n Time: ______,       Score: ______')
         document.add_page_break()
     document.save(docxName)
+
 
 # def id(id=0):
 #     return id+1
 
-def saveExpression(Expressions,docxName):
+def saveExpression(Expressions, docxName):
     document = Document()
     total = len(Expressions)
-    print 'Total Expressions are: '+str(total)
-    
-    index=0
-    while index<total:
+    print('Total Expressions are: ' + str(total))
+
+    index = 0
+    while index < total:
         table = document.add_table(rows=25, cols=4)
         for i in range(25):
             for j in range(4):
                 table.rows[i].cells[j].text = Expressions[index]
-                index = index+1
+                index = index + 1
         document.add_page_break()
     document.save(docxName)
 
-if __name__=="__main__":
-    print 'this is the main method'
+
+if __name__ == "__main__":
+    print('this is the main method')
     operDocx()
     # order = id()
     # writeDocx( '\t'+str(order) + '.'+ ' 12  +  44 =\t' + str(order) + '.'+ '\t 12  +  44 =\t' + str(order) + '.'+ '\t 12  +  44 =\t'+'\n\r','quiz.docx')
